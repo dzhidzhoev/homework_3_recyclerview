@@ -20,20 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /**
-                 * Реализовать добавление тестовых работников
-                 */
-            }
-        });
-
         recyclerView = findViewById(R.id.recycler_view);
         recyclerViewAdapter = new WorkerAdapter(WorkerGenerator.generateWorkers(20), this);
         recyclerView.setAdapter(recyclerViewAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         if (savedInstanceState != null) {
             layoutManager.onRestoreInstanceState(savedInstanceState);
@@ -42,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
             //noinspection unchecked
             recyclerViewAdapter.restoreState((List<Worker>) getLastCustomNonConfigurationInstance());
         }
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewAdapter.addWorker(WorkerGenerator.generateWorker());
+                layoutManager.scrollToPosition(recyclerViewAdapter.getItemCount() - 1);
+            }
+        });
     }
 
     @Override

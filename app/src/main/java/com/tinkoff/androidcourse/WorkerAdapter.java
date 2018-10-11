@@ -66,7 +66,7 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.ViewHolder
 
     void addWorker(Worker worker) {
         listItems.add(worker);
-        notifyItemInserted();
+        notifyItemInserted(listItems.size() - 1);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
