@@ -1,12 +1,15 @@
 package com.tinkoff.androidcourse;
 
 public class Worker {
+
+    public enum Gender { MALE, FEMALE, OTHER }
+
     private int id;
+    private Gender gender;
     private String name;
     private Integer photo;
     private String age;
     private String position;
-
 
     public int getId() {
         return id;
@@ -46,5 +49,13 @@ public class Worker {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

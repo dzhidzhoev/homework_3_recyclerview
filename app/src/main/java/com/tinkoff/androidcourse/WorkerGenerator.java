@@ -17,7 +17,13 @@ public class WorkerGenerator {
         Worker worker = new Worker();
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(2);
+        int genderDiversity = randomGenerator.nextInt(5);
         if (index == 0) {
+            if (genderDiversity == 0) {
+                worker.setGender(Worker.Gender.OTHER);
+            } else {
+                worker.setGender(Worker.Gender.MALE);
+            }
             index = randomGenerator.nextInt(maleNames.size());
             String randomName = maleNames.get(index);
             index = randomGenerator.nextInt(surnames.size());
@@ -27,6 +33,11 @@ public class WorkerGenerator {
             Integer randomPhoto = malePhoto.get(index);
             worker.setPhoto(randomPhoto);
         } else {
+            if (genderDiversity == 0) {
+                worker.setGender(Worker.Gender.OTHER);
+            } else {
+                worker.setGender(Worker.Gender.FEMALE);
+            }
             index = randomGenerator.nextInt(femaleNames.size());
             String randomName = femaleNames.get(index);
             index = randomGenerator.nextInt(surnames.size());
