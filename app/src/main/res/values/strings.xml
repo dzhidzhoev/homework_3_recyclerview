@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidCourse</string>
+    <string name="worker_photo">Worker\'s photo</string>
 </resources>
