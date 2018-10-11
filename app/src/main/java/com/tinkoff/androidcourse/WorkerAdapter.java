@@ -2,7 +2,9 @@ package com.tinkoff.androidcourse;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,50 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.ViewHolder> {
+public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.ViewHolder> implements ItemTouchAdapter {
+
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        View root;
+        ImageView photo;
+        TextView name;
+        TextView information;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            root = itemView;
+            photo = itemView.findViewById(R.id.worker_photo);
+            name = itemView.findViewById(R.id.worker_name);
+            information = itemView.findViewById(R.id.worker_info);
+        }
+    }
+
+    static class ItemTouchCallback extends ItemTouchHelper.Callback {
+        private ItemTouchAdapter listener;
+
+        public ItemTouchCallback(ItemTouchAdapter listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+            int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+            int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+            return makeMovementFlags(dragFlags, swipeFlags);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder vh, @NonNull RecyclerView.ViewHolder target) {
+            listener.onItemMoved(vh.getAdapterPosition(), target.getAdapterPosition());
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int dir) {
+            listener.onItemDismiss(viewHolder.getAdapterPosition());
+        }
+
+    }
 
     @NonNull
     private List<Worker> listItems;
@@ -69,19 +114,16 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.ViewHolder
         notifyItemInserted(listItems.size() - 1);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        View root;
-        ImageView photo;
-        TextView name;
-        TextView information;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            root = itemView;
-            photo = itemView.findViewById(R.id.worker_photo);
-            name = itemView.findViewById(R.id.worker_name);
-            information = itemView.findViewById(R.id.worker_info);
-        }
+    @Override
+    public void onItemDismiss(int position) {
+        listItems.remove(position);
+        notifyItemRemoved(position);
     }
 
+    @Override
+    public void onItemMoved(int index, int target) {
+        Worker item = listItems.remove(index);
+        listItems.add(target, item);
+        notifyItemMoved(index, target);
+    }
 }

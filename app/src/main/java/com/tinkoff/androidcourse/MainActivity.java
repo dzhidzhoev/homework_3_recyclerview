@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import java.util.List;
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 layoutManager.scrollToPosition(recyclerViewAdapter.getItemCount() - 1);
             }
         });
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new WorkerAdapter.ItemTouchCallback(recyclerViewAdapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
