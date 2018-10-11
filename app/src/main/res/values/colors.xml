@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="male_item_background">#dbf4ff</color>
     <color name="female_item_background">#f48fb1</color>
+    <color name="common_item_background">@android:color/transparent</color>
 </resources>

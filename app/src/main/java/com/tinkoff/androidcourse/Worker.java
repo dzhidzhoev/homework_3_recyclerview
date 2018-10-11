@@ -2,7 +2,7 @@ package com.tinkoff.androidcourse;
 
 public class Worker {
 
-    public enum Gender { MALE, FEMALE, OTHER }
+    public enum Gender { MALE, FEMALE, OTHER_NOT_SPECIFIED}
 
     private int id;
     private Gender gender;

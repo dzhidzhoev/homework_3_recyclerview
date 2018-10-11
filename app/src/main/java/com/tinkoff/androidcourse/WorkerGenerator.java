@@ -10,7 +10,7 @@ public class WorkerGenerator {
     private static List<String> femaleNames = new ArrayList<>(Arrays.asList("Anna", "Emma", "Sophie", "Jessica", "Scarlett", "Molly", "Lucy", "Megan"));
     private static List<String> surnames = new ArrayList<>(Arrays.asList("Green", "Smith", "Taylor", "Brown", "Wilson", "Walker", "White", "Jackson", "Wood"));
     private static List<Integer> femalePhoto = new ArrayList<>(Arrays.asList(R.drawable.ic_female_black, R.drawable.ic_female_green, R.drawable.ic_female_red, R.drawable.ic_female_magnetta));
-    private static List<Integer> malePhoto = new ArrayList<>(Arrays.asList(R.drawable.ic_male_black, R.drawable.ic_male_green, R.drawable.ic_male_red, R.drawable.ic_male_magnetta));
+    private static List<Integer> malePhoto = new ArrayList<>(Arrays.asList(R.drawable.ic_male_blue, R.drawable.ic_male_green, R.drawable.ic_male_red, R.drawable.ic_male_magnetta));
     private static List<String> positions = new ArrayList<>(Arrays.asList("Android programmer", "iOs programmer", "Web programmer", "Designer"));
 
     public static Worker generateWorker() {
@@ -20,7 +20,7 @@ public class WorkerGenerator {
         int genderDiversity = randomGenerator.nextInt(5);
         if (index == 0) {
             if (genderDiversity == 0) {
-                worker.setGender(Worker.Gender.OTHER);
+                worker.setGender(Worker.Gender.OTHER_NOT_SPECIFIED);
             } else {
                 worker.setGender(Worker.Gender.MALE);
             }
@@ -34,7 +34,7 @@ public class WorkerGenerator {
             worker.setPhoto(randomPhoto);
         } else {
             if (genderDiversity == 0) {
-                worker.setGender(Worker.Gender.OTHER);
+                worker.setGender(Worker.Gender.OTHER_NOT_SPECIFIED);
             } else {
                 worker.setGender(Worker.Gender.FEMALE);
             }
