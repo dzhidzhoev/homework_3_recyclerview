@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerViewAdapter = new WorkerAdapter(WorkerGenerator.generateWorkers(20), this);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.addItemDecoration(new WorkerItemDecorator());
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         if (savedInstanceState != null) {
