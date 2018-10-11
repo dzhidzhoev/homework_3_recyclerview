@@ -64,6 +64,11 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    void addWorker(Worker worker) {
+        listItems.add(worker);
+        notifyItemInserted();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         View root;
         ImageView photo;

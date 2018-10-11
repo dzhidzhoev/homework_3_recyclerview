@@ -33,20 +33,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerViewAdapter = new WorkerAdapter(WorkerGenerator.generateWorkers(20), this);
         recyclerView.setAdapter(recyclerViewAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         if (savedInstanceState != null) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
             layoutManager.onRestoreInstanceState(savedInstanceState);
         }
         if (getLastCustomNonConfigurationInstance() != null) {
             //noinspection unchecked
             recyclerViewAdapter.restoreState((List<Worker>) getLastCustomNonConfigurationInstance());
         }
-        /**
-         * Реализовать адаптер, выбрать любой LayoutManager и прикрутить это всё к RecyclerView
-         *
-         * Тестовые данные для отображения генерятся WorkerGenerator
-         */
     }
 
     @Override
